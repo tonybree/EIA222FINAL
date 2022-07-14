@@ -11,6 +11,8 @@ var Gemüsegarten_Simulator;
         let progress: HTMLProgressElement = <HTMLProgressElement>(
           document.querySelector("progress")
         );*/
+        let capital = document.querySelector("div#capital");
+        capital.innerHTML = "";
         let formData = new FormData(document.forms[0]);
         /*//let progress: HTMLProgressElement = <HTMLProgressElement>document.querySelector("progress");
         //let amount: string = (<HTMLInputElement>_event.target).value;
@@ -22,6 +24,7 @@ var Gemüsegarten_Simulator;
             console.log(gain);
             let price = Number(gain.getAttribute("price"));
             console.log(price);
+            capital.innerHTML += gain.name + " € " + gain;
         }
     }
 })(Gemüsegarten_Simulator || (Gemüsegarten_Simulator = {}));

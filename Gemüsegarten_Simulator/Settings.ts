@@ -15,6 +15,9 @@ namespace Gemüsegarten_Simulator {
     let progress: HTMLProgressElement = <HTMLProgressElement>(
       document.querySelector("progress")
     );*/
+    let capital: HTMLDivElement = <HTMLDivElement>document.querySelector("div#capital");
+    capital.innerHTML = "";
+    
     let formData: FormData = new FormData(document.forms[0]);
     /*//let progress: HTMLProgressElement = <HTMLProgressElement>document.querySelector("progress");
     //let amount: string = (<HTMLInputElement>_event.target).value;
@@ -28,6 +31,7 @@ namespace Gemüsegarten_Simulator {
       let price: number = Number(gain.getAttribute("price"));
       console.log(price);
 
+      capital.innerHTML += gain.name + " € " +gain;
     }
   }
 }
