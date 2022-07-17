@@ -4,6 +4,7 @@ var Gemüsegarten_Simulator;
         position;
         constructor(_position) {
             console.log("field constructor");
+            super(_position);
         }
     }
     Gemüsegarten_Simulator.Field = Field;

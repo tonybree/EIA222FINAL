@@ -15,9 +15,14 @@ var Gemüsegarten_Simulator;
         Gemüsegarten_Simulator.crc2 = canvas.getContext("2d");
         drawBackground();
         drawField({ x: 0, y: -20 });
-        drawSalad({ x: 750, y: 500 }, { x: 40, y: 40 });
         //createPaths();
-        //drawTomato();
+        //drawBugs();
+        drawTomato();
+        drawCucumber();
+        drawPaprika();
+        drawEggplant();
+        drawSalad({ x: 750, y: 505 }, { x: 30, y: 30 });
+        createBugs(3);
         let vegetables = new Gemüsegarten_Simulator.Vegetable((this.x, this.y), this.vegs, 1);
         console.log(bugs);
         console.log(vegetables);
@@ -36,12 +41,120 @@ var Gemüsegarten_Simulator;
     }
     //TOMATO
     function drawTomato() {
+        Gemüsegarten_Simulator.crc2.save();
         Gemüsegarten_Simulator.crc2.beginPath();
+        Gemüsegarten_Simulator.crc2.shadowOffsetX = 3;
+        Gemüsegarten_Simulator.crc2.shadowOffsetY = 3;
+        Gemüsegarten_Simulator.crc2.shadowColor = "black";
+        Gemüsegarten_Simulator.crc2.shadowBlur = 5;
         Gemüsegarten_Simulator.crc2.fillStyle = "red";
-        Gemüsegarten_Simulator.crc2.ellipse(750, 100, 20, 30, Math.PI / 2, 0, 2 * Math.PI);
+        Gemüsegarten_Simulator.crc2.ellipse(750, 80, 20, 30, Math.PI / 2, 0, 2 * Math.PI);
         Gemüsegarten_Simulator.crc2.closePath();
         Gemüsegarten_Simulator.crc2.fill();
+        Gemüsegarten_Simulator.crc2.restore();
+        Gemüsegarten_Simulator.crc2.save();
+        Gemüsegarten_Simulator.crc2.font = '20px Arial';
+        Gemüsegarten_Simulator.crc2.lineWidth = 1;
+        Gemüsegarten_Simulator.crc2.strokeStyle = "darkred";
+        Gemüsegarten_Simulator.crc2.strokeText('Tomato', 720, 130, 60);
+        Gemüsegarten_Simulator.crc2.restore();
     }
+    //CUCUMBER
+    function drawCucumber() {
+        Gemüsegarten_Simulator.crc2.save();
+        Gemüsegarten_Simulator.crc2.beginPath();
+        Gemüsegarten_Simulator.crc2.fillStyle = "hsl(150, 100%, 60%)";
+        Gemüsegarten_Simulator.crc2.ellipse(750, 190, 25, 25, Math.PI / 2, 0, 2 * Math.PI);
+        Gemüsegarten_Simulator.crc2.closePath();
+        Gemüsegarten_Simulator.crc2.shadowOffsetX = 3;
+        Gemüsegarten_Simulator.crc2.shadowOffsetY = 3;
+        Gemüsegarten_Simulator.crc2.shadowColor = "black";
+        Gemüsegarten_Simulator.crc2.shadowBlur = 5;
+        Gemüsegarten_Simulator.crc2.fill();
+        Gemüsegarten_Simulator.crc2.restore();
+        Gemüsegarten_Simulator.crc2.save();
+        Gemüsegarten_Simulator.crc2.font = '20px Arial';
+        Gemüsegarten_Simulator.crc2.lineWidth = 1;
+        Gemüsegarten_Simulator.crc2.strokeStyle = "hsl(150, 100%, 10%)";
+        Gemüsegarten_Simulator.crc2.strokeText('Cucumber', 710, 240, 80);
+        Gemüsegarten_Simulator.crc2.restore();
+    }
+    //PAPRIKA
+    function drawPaprika() {
+        Gemüsegarten_Simulator.crc2.save();
+        Gemüsegarten_Simulator.crc2.beginPath();
+        Gemüsegarten_Simulator.crc2.fillStyle = "hsl(54, 100%, 56%)";
+        Gemüsegarten_Simulator.crc2.beginPath();
+        Gemüsegarten_Simulator.crc2.lineTo(750, 270);
+        Gemüsegarten_Simulator.crc2.lineTo(780, 300);
+        Gemüsegarten_Simulator.crc2.lineTo(750, 330);
+        Gemüsegarten_Simulator.crc2.lineTo(720, 300);
+        Gemüsegarten_Simulator.crc2.closePath();
+        Gemüsegarten_Simulator.crc2.shadowOffsetX = 3;
+        Gemüsegarten_Simulator.crc2.shadowOffsetY = 3;
+        Gemüsegarten_Simulator.crc2.shadowColor = "black";
+        Gemüsegarten_Simulator.crc2.shadowBlur = 5;
+        Gemüsegarten_Simulator.crc2.fill();
+        Gemüsegarten_Simulator.crc2.restore();
+        Gemüsegarten_Simulator.crc2.save();
+        Gemüsegarten_Simulator.crc2.font = '20px Arial';
+        Gemüsegarten_Simulator.crc2.lineWidth = 1;
+        Gemüsegarten_Simulator.crc2.strokeStyle = "hsl(54, 100%, 15%)";
+        Gemüsegarten_Simulator.crc2.strokeText('Paprika', 720, 350, 60);
+        Gemüsegarten_Simulator.crc2.restore();
+    }
+    //EGGPLANT
+    function drawEggplant() {
+        Gemüsegarten_Simulator.crc2.save();
+        Gemüsegarten_Simulator.crc2.beginPath();
+        Gemüsegarten_Simulator.crc2.strokeStyle = "black";
+        Gemüsegarten_Simulator.crc2.fillStyle = "hsl(276, 100%, 47%)";
+        Gemüsegarten_Simulator.crc2.lineWidth = 2;
+        Gemüsegarten_Simulator.crc2.moveTo(740, 380);
+        Gemüsegarten_Simulator.crc2.bezierCurveTo(750, 380, 810, 420, 730, 440);
+        Gemüsegarten_Simulator.crc2.closePath();
+        Gemüsegarten_Simulator.crc2.shadowOffsetX = 3;
+        Gemüsegarten_Simulator.crc2.shadowOffsetY = 3;
+        Gemüsegarten_Simulator.crc2.shadowColor = "black";
+        Gemüsegarten_Simulator.crc2.shadowBlur = 5;
+        Gemüsegarten_Simulator.crc2.fill();
+        Gemüsegarten_Simulator.crc2.restore();
+        Gemüsegarten_Simulator.crc2.save();
+        Gemüsegarten_Simulator.crc2.font = '20px Arial';
+        Gemüsegarten_Simulator.crc2.lineWidth = 1;
+        Gemüsegarten_Simulator.crc2.strokeStyle = "hsl(276, 100%, 20%)";
+        Gemüsegarten_Simulator.crc2.strokeText('Eggplant', 715, 460, 70);
+        Gemüsegarten_Simulator.crc2.restore();
+    }
+    //SALAD
+    function drawSalad(_position, _size) {
+        let nParticles = 11;
+        let radiusParticle = 18;
+        let particle = new Path2D();
+        particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
+        Gemüsegarten_Simulator.crc2.save();
+        Gemüsegarten_Simulator.crc2.translate(_position.x, _position.y);
+        Gemüsegarten_Simulator.crc2.fillStyle = "green";
+        for (let drawn = 0; drawn < nParticles; drawn++) {
+            Gemüsegarten_Simulator.crc2.save();
+            let x = (Math.random() - 0.5) * _size.x;
+            let y = Math.random() * _size.y;
+            Gemüsegarten_Simulator.crc2.translate(x, y);
+            Gemüsegarten_Simulator.crc2.fill(particle);
+            Gemüsegarten_Simulator.crc2.restore();
+            Gemüsegarten_Simulator.crc2.shadowOffsetX = 1;
+            Gemüsegarten_Simulator.crc2.shadowOffsetY = 1;
+            Gemüsegarten_Simulator.crc2.shadowColor = "black";
+            Gemüsegarten_Simulator.crc2.shadowBlur = 1;
+        }
+        Gemüsegarten_Simulator.crc2.restore();
+        Gemüsegarten_Simulator.crc2.save();
+        Gemüsegarten_Simulator.crc2.font = '20px Arial';
+        Gemüsegarten_Simulator.crc2.lineWidth = 1;
+        Gemüsegarten_Simulator.crc2.strokeStyle = "green";
+        Gemüsegarten_Simulator.crc2.strokeText('Salad', 728, 570, 80);
+    }
+    // DRAW FIELD
     function drawField(_position) {
         let nRows = 5;
         let nCollumn = 8;
@@ -52,7 +165,7 @@ var Gemüsegarten_Simulator;
         field.rect(0, 0, fieldSize, fieldSize);
         Gemüsegarten_Simulator.crc2.save();
         Gemüsegarten_Simulator.crc2.translate(_position.x, _position.y);
-        Gemüsegarten_Simulator.crc2.fillStyle = "brown";
+        Gemüsegarten_Simulator.crc2.fillStyle = "hsl(30, 100%, 31%)";
         let offsetY = 0;
         for (let drawn = 0; drawn < nRows; drawn++) {
             let offsetX = 0;
@@ -75,26 +188,8 @@ var Gemüsegarten_Simulator;
         }
         Gemüsegarten_Simulator.crc2.restore();
     }
-    function drawSalad(_position, _size) {
-        let nParticles = 15;
-        let radiusParticle = 18;
-        let particle = new Path2D();
-        particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
-        Gemüsegarten_Simulator.crc2.save();
-        Gemüsegarten_Simulator.crc2.translate(_position.x, _position.y);
-        Gemüsegarten_Simulator.crc2.fillStyle = "green";
-        for (let drawn = 0; drawn < nParticles; drawn++) {
-            Gemüsegarten_Simulator.crc2.save();
-            let x = (Math.random() - 0.5) * _size.x;
-            let y = Math.random() * _size.y;
-            Gemüsegarten_Simulator.crc2.translate(x, y);
-            Gemüsegarten_Simulator.crc2.fill(particle);
-            Gemüsegarten_Simulator.crc2.restore();
-        }
-        Gemüsegarten_Simulator.crc2.restore();
-    }
     function drawBackground() {
-        Gemüsegarten_Simulator.crc2.fillStyle = "white";
+        Gemüsegarten_Simulator.crc2.fillStyle = "hsl(30, 0%, 95%)";
         Gemüsegarten_Simulator.crc2.strokeStyle = "black";
         Gemüsegarten_Simulator.crc2.fillRect(0, 0, Gemüsegarten_Simulator.crc2.canvas.width, Gemüsegarten_Simulator.crc2.canvas.height);
         /*crc2.beginPath();

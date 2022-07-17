@@ -11,7 +11,7 @@ body {
 }*/
 
 div {
-  border: thin solid grey;
+  border: thin solid #8f8f8f;
   /*text-align: 30%;*/
   width: 50%;
   margin: auto;

@@ -1,3 +1,4 @@
+namespace Gemüsegarten_Simulator {
 export enum VEGS {
     TOMATO,
     CUCUMBER,
@@ -5,3 +6,4 @@ export enum VEGS {
     EGGPLANT,
     SALAD,
   }
+}

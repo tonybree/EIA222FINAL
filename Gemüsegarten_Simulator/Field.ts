@@ -1,9 +1,10 @@
 namespace Gemüsegarten_Simulator {
   export class Field {
-    position: Vector;
+    public position: Vector;
 
     constructor(_position: Vector) {
       console.log("field constructor");
+      super(_position);
     }
   }
 

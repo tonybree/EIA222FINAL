@@ -33,16 +33,23 @@ namespace Gemüsegarten_Simulator {
                 this.position.y -= crc2.canvas.height;
         }
 
-        draw(): void {
-            console.log("draw Bug");
+        drawBugs(): void {
             crc2.save();
-            crc2.translate(this.position.x, this.position.y);
-            crc2.stroke()
             crc2.beginPath();
             crc2.fillStyle = "white";
-            crc2.ellipse(750, 100, 20, 30, Math.PI / 2, 0, 2 * Math.PI);
+            crc2.ellipse(120, 90, 10, 15, Math.PI / 1.5, 0, 2 * Math.PI);
+            crc2.ellipse(130, 70, 10, 15, Math.PI / 1.5, 0, 2 * Math.PI);
             crc2.closePath();
             crc2.fill();
-        }
+            crc2.restore();
+        
+            crc2.save();
+            crc2.beginPath();
+            crc2.fillStyle = "black";
+            crc2.ellipse(125, 81, 10, 10, Math.PI / 2, 0, 2 * Math.PI);
+            crc2.closePath();
+            crc2.fill();
+            crc2.restore();
+          }
     }
 }

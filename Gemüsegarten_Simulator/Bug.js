@@ -29,16 +29,22 @@ var Gemüsegarten_Simulator;
             if (this.position.y > Gemüsegarten_Simulator.crc2.canvas.height)
                 this.position.y -= Gemüsegarten_Simulator.crc2.canvas.height;
         }
-        draw() {
-            console.log("draw Bug");
+        drawBugs() {
             Gemüsegarten_Simulator.crc2.save();
-            Gemüsegarten_Simulator.crc2.translate(this.position.x, this.position.y);
-            Gemüsegarten_Simulator.crc2.stroke();
             Gemüsegarten_Simulator.crc2.beginPath();
             Gemüsegarten_Simulator.crc2.fillStyle = "white";
-            Gemüsegarten_Simulator.crc2.ellipse(750, 100, 20, 30, Math.PI / 2, 0, 2 * Math.PI);
+            Gemüsegarten_Simulator.crc2.ellipse(120, 90, 10, 15, Math.PI / 1.5, 0, 2 * Math.PI);
+            Gemüsegarten_Simulator.crc2.ellipse(130, 70, 10, 15, Math.PI / 1.5, 0, 2 * Math.PI);
             Gemüsegarten_Simulator.crc2.closePath();
             Gemüsegarten_Simulator.crc2.fill();
+            Gemüsegarten_Simulator.crc2.restore();
+            Gemüsegarten_Simulator.crc2.save();
+            Gemüsegarten_Simulator.crc2.beginPath();
+            Gemüsegarten_Simulator.crc2.fillStyle = "black";
+            Gemüsegarten_Simulator.crc2.ellipse(125, 81, 10, 10, Math.PI / 2, 0, 2 * Math.PI);
+            Gemüsegarten_Simulator.crc2.closePath();
+            Gemüsegarten_Simulator.crc2.fill();
+            Gemüsegarten_Simulator.crc2.restore();
         }
     }
     Gemüsegarten_Simulator.Bug = Bug;
