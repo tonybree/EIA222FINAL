@@ -21,7 +21,7 @@ namespace Gemüsegarten_Simulator {
             return vector;
         }
 
-        public get length(): number {
+        get length(): number {
             return Math.hypot(this.x, this.y);
         }
         

@@ -9,46 +9,7 @@ namespace Gemüsegarten_Simulator {
 
   export let bugPath: Bug = new Bug(1);
 
-  export function drawField(_position: Vector): void {
-    let nRows: number = 5;
-    let nCollumn: number = 8;
-    let fieldSize: number = 50;
-    let widthField: number = 490;
-    let heightField: number = 270;
-    let field: Path2D = new Path2D();
 
-    field.rect(0, 0, fieldSize, fieldSize);
-
-    crc2.save();
-    crc2.translate(_position.x, _position.y);
-
-    crc2.fillStyle = "brown";
-
-    let offsetY = 0;
-    for (let drawn: number = 0; drawn < nRows; drawn++) {
-      let offsetX = 0;
-      for (let drawn: number = 0; drawn < nCollumn; drawn++) {
-        crc2.save();
-        let x = 0;
-        if (drawn == 0) {
-          x = 30 + offsetX;
-        } else {
-          x = 20 + widthField / 8 + offsetX;
-        }
-        offsetX = x;
-        let y: number = heightField / 5 + offsetY;
-        crc2.translate(x, y);
-        crc2.fill(field);
-        crc2.restore();
-      }
-      offsetY += fieldSize + 30;
-    }
-    crc2.restore();
-  }
-
-  export function createPaths(): void {
-    bugPath = createBugPaths(drawField);
-  }
 
   function createBugPaths(): void {
     let paths: Path2D[] = [];

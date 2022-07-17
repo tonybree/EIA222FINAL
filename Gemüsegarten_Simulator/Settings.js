@@ -13,26 +13,60 @@ var Gemüsegarten_Simulator;
             return;
         Gemüsegarten_Simulator.crc2 = canvas.getContext("2d");
         drawBackground();
-        Gemüsegarten_Simulator.drawField({ x: 0, y: 0 });
+        drawField({ x: 0, y: 0 });
         drawSalad({ x: 750, y: 500 }, { x: 40, y: 40 });
-        Gemüsegarten_Simulator.createPaths();
+        //createPaths();
+        drawTomato();
         let bugs = new Gemüsegarten_Simulator.Bug(1);
-        let vegetables = new Gemüsegarten_Simulator.Vegetable((this.x, this.y), "Tomato", 1);
+        let vegetables = new Gemüsegarten_Simulator.Vegetable((this.x, this.y), this.vegs, 1);
         console.log(bugs);
         console.log(vegetables);
         //vegetables.push();
         form.addEventListener("change", buildGame);
     }
-    function drawBackground() {
-        Gemüsegarten_Simulator.crc2.fillStyle = "white";
+    //TOMATO
+    function drawTomato() {
+        Gemüsegarten_Simulator.crc2.beginPath();
         Gemüsegarten_Simulator.crc2.strokeStyle = "black";
-        Gemüsegarten_Simulator.crc2.fillRect(0, 0, Gemüsegarten_Simulator.crc2.canvas.width, Gemüsegarten_Simulator.crc2.canvas.height);
-        /*crc2.beginPath();
-        crc2.lineWidth = 2;
-        crc2.rect(20, 30, 50, 50);
-        crc2.stroke();*/
+        Gemüsegarten_Simulator.crc2.fillStyle = "red";
+        Gemüsegarten_Simulator.crc2.rect(100, 100, 500, 400);
+        Gemüsegarten_Simulator.crc2.closePath();
+        Gemüsegarten_Simulator.crc2.stroke();
+        Gemüsegarten_Simulator.crc2.fill();
     }
-    // draw Salad
+    function drawField(_position) {
+        let nRows = 5;
+        let nCollumn = 8;
+        let fieldSize = 50;
+        let widthField = 490;
+        let heightField = 270;
+        let field = new Path2D();
+        field.rect(0, 0, fieldSize, fieldSize);
+        Gemüsegarten_Simulator.crc2.save();
+        Gemüsegarten_Simulator.crc2.translate(_position.x, _position.y);
+        Gemüsegarten_Simulator.crc2.fillStyle = "brown";
+        let offsetY = 0;
+        for (let drawn = 0; drawn < nRows; drawn++) {
+            let offsetX = 0;
+            for (let drawn = 0; drawn < nCollumn; drawn++) {
+                Gemüsegarten_Simulator.crc2.save();
+                let x = 0;
+                if (drawn == 0) {
+                    x = 30 + offsetX;
+                }
+                else {
+                    x = 20 + widthField / 8 + offsetX;
+                }
+                offsetX = x;
+                let y = heightField / 5 + offsetY;
+                Gemüsegarten_Simulator.crc2.translate(x, y);
+                Gemüsegarten_Simulator.crc2.fill(field);
+                Gemüsegarten_Simulator.crc2.restore();
+            }
+            offsetY += fieldSize + 30;
+        }
+        Gemüsegarten_Simulator.crc2.restore();
+    }
     function drawSalad(_position, _size) {
         let nParticles = 15;
         let radiusParticle = 18;
@@ -51,6 +85,15 @@ var Gemüsegarten_Simulator;
         }
         Gemüsegarten_Simulator.crc2.restore();
     }
+    function drawBackground() {
+        Gemüsegarten_Simulator.crc2.fillStyle = "white";
+        Gemüsegarten_Simulator.crc2.strokeStyle = "black";
+        Gemüsegarten_Simulator.crc2.fillRect(0, 0, Gemüsegarten_Simulator.crc2.canvas.width, Gemüsegarten_Simulator.crc2.canvas.height);
+        /*crc2.beginPath();
+        crc2.lineWidth = 2;
+        crc2.rect(20, 30, 50, 50);
+        crc2.stroke();*/
+    }
     function buildGame(_event) {
         //console.log(_event);
         let formData = new FormData(document.forms[0]);
@@ -61,23 +104,31 @@ var Gemüsegarten_Simulator;
             let money = Number(selection.getAttribute("money"));
             console.log(money);
         }
-        vegDied();
+        /*function createPaths(): void {
+          bugPath = createBugPaths(drawField);
+        }
+    
+        /*vegDied();
+    
         handleAttacks();
-        function vegDied() {
-            for (let i = vegetables.length - 1; i >= 0; i--) {
-                if (vegetables[i].expandable)
-                    vegetables.splice(i, 1);
+    
+        function vegDied(): void {
+          for (let i: number = vegetables.length - 1; i >= 0; i--) {
+            if (vegetables[i].expandable)
+              vegetables.splice(i, 1);
+          }
+        }
+    
+        function handleAttacks(): void {
+          for (let i: number = 0; i < bugs.length; i++)
+            for (let j: number = i+1; j < bugs.length; j++)
+            let veg: Vegetable = vegetables[i];
+            let bug: Bug = bugs[j];
+            if(veg.bugAttack(bug)) {
+              bug.attacked();
             }
         }
-        function handleAttacks() {
-            for (let i = 0; i < bugs.length; i++)
-                for (let j = i + 1; j < bugs.length; j++)
-                    let veg = vegetables[i];
-            let bug = bugs[j];
-            if (veg.bugAttack(bug)) {
-                bug.attacked();
-            }
-        }
+    
         /*function displayCapital(_event: Event): void {
           let progress: HTMLProgressElement = <HTMLProgressElement>document.querySelector("progress");
           let radio: string = (<HTMLInputElement>_event.target).value;
@@ -87,4 +138,7 @@ var Gemüsegarten_Simulator;
         }*/
     }
 })(Gemüsegarten_Simulator || (Gemüsegarten_Simulator = {}));
+function drawField(field) {
+    throw new Error("Function not implemented.");
+}
 //# sourceMappingURL=Settings.js.map
