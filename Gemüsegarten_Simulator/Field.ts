@@ -9,7 +9,7 @@ namespace Gemüsegarten_Simulator {
 
   export let bugPath: Bug = new Bug(1);
 
-
+  
 
   function createBugPaths(): void {
     let paths: Path2D[] = [];

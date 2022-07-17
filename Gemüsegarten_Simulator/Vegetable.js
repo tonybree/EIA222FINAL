@@ -1,21 +1,8 @@
 var Gemüsegarten_Simulator;
 (function (Gemüsegarten_Simulator) {
-    let VEGS;
-    (function (VEGS) {
-        VEGS[VEGS["TOMATO"] = 0] = "TOMATO";
-        VEGS[VEGS["CUCUMBER"] = 1] = "CUCUMBER";
-        VEGS[VEGS["PAPRIKA"] = 2] = "PAPRIKA";
-        VEGS[VEGS["EGGPLANT"] = 3] = "EGGPLANT";
-        VEGS[VEGS["SALAD"] = 4] = "SALAD";
-    })(VEGS || (VEGS = {}));
     class Vegetable {
         position;
-        vegs;
-        tomato;
-        cucumber;
-        paprika;
-        eggplant;
-        salad;
+        vegType;
         state;
         bugAttack;
         constructor(_position, _vegs, _state) {
@@ -34,15 +21,14 @@ var Gemüsegarten_Simulator;
             console.log("Attacked", this);
             this.expandable = true;
         }
-        update() {
+        draw() {
             switch (this.vegs) {
                 case VEGS.TOMATO:
                     Gemüsegarten_Simulator.crc2.beginPath();
-                    Gemüsegarten_Simulator.crc2.strokeStyle = "black";
                     Gemüsegarten_Simulator.crc2.fillStyle = "red";
-                    Gemüsegarten_Simulator.crc2.rect(100, 100, 50, 40);
-                    Gemüsegarten_Simulator.crc2.save;
-                    Gemüsegarten_Simulator.crc2.transform;
+                    Gemüsegarten_Simulator.crc2.ellipse(750, 100, 20, 30, Math.PI / 2, 0, 2 * Math.PI);
+                    Gemüsegarten_Simulator.crc2.closePath();
+                    Gemüsegarten_Simulator.crc2.fill();
                     break;
                 case VEGS.SALAD:
                     function drawSalad(_position, _size) {
@@ -68,4 +54,41 @@ var Gemüsegarten_Simulator;
     }
     Gemüsegarten_Simulator.Vegetable = Vegetable;
 })(Gemüsegarten_Simulator || (Gemüsegarten_Simulator = {}));
+var KebapStore;
+(function (KebapStore) {
+    class Dish {
+        dishType;
+        constructor(_dishType) {
+            console.log("dish constructor");
+            this.dishType = _dishType;
+        }
+        draw() {
+            console.log("sketch Dish");
+            switch (this.dishType) {
+                case DishType.Döner:
+                    crc2.beginPath();
+                    crc2.fillStyle = "#BF882E";
+                    crc2.fillRect(150, 83, 65, 32); //Döner
+                    crc2.save();
+                    crc2.restore();
+                    break;
+                case DishType.Falafel:
+                    crc2.beginPath();
+                    crc2.fillStyle = "#BF882E";
+                    crc2.fillRect(150, 8, 65, 32); //Falafel
+                    crc2.save();
+                    crc2.restore();
+                    break;
+                case DishType.Yufka:
+                    crc2.beginPath();
+                    crc2.fillStyle = "#BF882E";
+                    crc2.fillRect(150, 45.5, 65, 32); //Yufka
+                    crc2.save();
+                    crc2.restore();
+                    break;
+            }
+        }
+    }
+    KebapStore.Dish = Dish;
+})(KebapStore || (KebapStore = {}));
 //# sourceMappingURL=Vegetable.js.map

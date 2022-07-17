@@ -6,6 +6,7 @@ namespace Gemüsegarten_Simulator {
   //export let allFields: Field[] = [];
   //export let allPlants: Plant[] = [];
   export let time: number = 0;
+  let bugs: Bug[] = [];
 
   function handleLoad(_event: Event): void {
     console.log("Start");
@@ -18,47 +19,49 @@ namespace Gemüsegarten_Simulator {
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
     drawBackground();
-    drawField({x: 0, y: 0});
+    drawField({ x: 0, y: -20 });
     drawSalad({ x: 750, y: 500 }, { x: 40, y: 40 });
-    
-    
-    
+
     //createPaths();
 
+    //drawTomato();
 
-    drawTomato();
-
-
-    let bugs: Bug = new Bug(1)
     let vegetables: Vegetable = new Vegetable((this.x, this.y), this.vegs, 1);
     console.log(bugs);
     console.log(vegetables);
     //vegetables.push();
 
     form.addEventListener("change", buildGame);
+
+    canvas.addEventListener("mousedown", grabVeg);
+    canvas.addEventListener("mousedown", placeVeg);
+    canvas.addEventListener("mousedown", addToVeg);
+
+    window.setInterval(update, 20);
+  }
+
+  function createBugs(_nBugs: number): void {
+    for (let i: number = 0; i < _nBugs; i++) {
+      let bugs: Bug = new Bug (1.0);
+      bugs.push(bug);
+    }
   }
 
   //TOMATO
   function drawTomato(): void {
-  crc2.beginPath();
-  crc2.strokeStyle = "black";
-  crc2.fillStyle = "red";
-  crc2.rect(100, 100, 500, 400);
-  crc2.closePath();
-  crc2.stroke();
-  crc2.fill();
-
+    crc2.beginPath();
+    crc2.fillStyle = "red";
+    crc2.ellipse(750, 100, 20, 30, Math.PI / 2, 0, 2 * Math.PI);
+    crc2.closePath();
+    crc2.fill();
   }
-
-  
-
 
   function drawField(_position: Vector): void {
     let nRows: number = 5;
     let nCollumn: number = 8;
-    let fieldSize: number = 50;
-    let widthField: number = 490;
-    let heightField: number = 270;
+    let fieldSize: number = 60;
+    let widthField: number = 510;
+    let heightField: number = 350;
     let field: Path2D = new Path2D();
 
     field.rect(0, 0, fieldSize, fieldSize);
@@ -75,7 +78,7 @@ namespace Gemüsegarten_Simulator {
         crc2.save();
         let x = 0;
         if (drawn == 0) {
-          x = 30 + offsetX;
+          x = 20 + offsetX;
         } else {
           x = 20 + widthField / 8 + offsetX;
         }
@@ -85,39 +88,32 @@ namespace Gemüsegarten_Simulator {
         crc2.fill(field);
         crc2.restore();
       }
-      offsetY += fieldSize + 30;
+      offsetY += fieldSize + 50;
     }
     crc2.restore();
   }
-
 
   function drawSalad(_position: Vector, _size: Vector): void {
     let nParticles: number = 15;
     let radiusParticle: number = 18;
     let particle: Path2D = new Path2D();
-    
-    particle.arc(0, 0, radiusParticle, 0, 2*Math.PI);
+
+    particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
 
     crc2.save();
     crc2.translate(_position.x, _position.y);
-
 
     crc2.fillStyle = "green";
     for (let drawn: number = 0; drawn < nParticles; drawn++) {
       crc2.save();
       let x: number = (Math.random() - 0.5) * _size.x;
-      let y: number = (Math.random() * _size.y);
+      let y: number = Math.random() * _size.y;
       crc2.translate(x, y);
       crc2.fill(particle);
       crc2.restore();
     }
     crc2.restore();
   }
-
-  
-
-
-
 
   function drawBackground(): void {
     crc2.fillStyle = "white";
@@ -128,7 +124,6 @@ namespace Gemüsegarten_Simulator {
     crc2.rect(20, 30, 50, 50);
     crc2.stroke();*/
   }
-  
 
   function buildGame(_event: Event): void {
     //console.log(_event);
@@ -144,14 +139,22 @@ namespace Gemüsegarten_Simulator {
       let money: number = Number(selection.getAttribute("money"));
       console.log(money);
     }
+  }
+  function update(): void {
+    crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
 
-
-  
-    /*function createPaths(): void {
-      bugPath = createBugPaths(drawField);
+    for (let bug of bugs) {
+      bug.move(1 / 50);
+      bug.draw();
     }
+  }
+}
 
-    /*vegDied();
+/*function createPaths(): void {
+      bugPath = createBugPaths(drawField);
+    }*/
+
+/*vegDied();
 
     handleAttacks();
 
@@ -179,9 +182,3 @@ namespace Gemüsegarten_Simulator {
           let capital: HTMLDivElement = <HTMLDivElement>document.querySelector("div#capital");
     capital.innerHTML = "";
     }*/
-  }
-}
-function drawField(field: any) {
-  throw new Error("Function not implemented.");
-}
-

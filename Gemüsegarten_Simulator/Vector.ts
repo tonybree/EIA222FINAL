@@ -1,5 +1,5 @@
 namespace Gemüsegarten_Simulator {
-    export class Vector {
+    export class Vector {
         x: number;
         y: number;
 
@@ -38,6 +38,9 @@ namespace Gemüsegarten_Simulator {
         public add (_addend: Vector) {
             this.x = _addend.x;
             this.y = _addend.y;
+        }
+        copy(): Vector {
+            return new Vector(this.x, this.y);
         }
     }
 }

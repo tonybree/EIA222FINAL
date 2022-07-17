@@ -1,20 +1,8 @@
 namespace Gemüsegarten_Simulator {
-  enum VEGS {
-    TOMATO,
-    CUCUMBER,
-    PAPRIKA,
-    EGGPLANT,
-    SALAD,
-  }
 
   export class Vegetable {
     public position: Vector;
-    public vegs: number;
-    public tomato: VEGS.TOMATO;
-    public cucumber: VEGS.CUCUMBER;
-    public paprika: VEGS.PAPRIKA;
-    public eggplant: VEGS.EGGPLANT;
-    public salad: VEGS.SALAD;
+    public vegType: VegType;
     public state: Number;
     public bugAttack: number;
 
@@ -37,15 +25,14 @@ namespace Gemüsegarten_Simulator {
       this.expandable = true;
     }
 
-    public update(): void {
+    public draw(): void {
       switch (this.vegs) {
         case VEGS.TOMATO:
             crc2.beginPath();
-            crc2.strokeStyle = "black";
             crc2.fillStyle = "red";
-            crc2.rect(100, 100, 50, 40);
-            crc2.save;
-            crc2.transform;
+            crc2.ellipse(750, 100, 20, 30, Math.PI / 2, 0, 2 * Math.PI);
+            crc2.closePath();
+            crc2.fill();
             break;
         case VEGS.SALAD:
             function drawSalad(_position: Vector, _size: Vector): void {
@@ -72,5 +59,49 @@ namespace Gemüsegarten_Simulator {
               }
       }
     }
+  }
+}
+
+
+namespace KebapStore {
+    
+  export class Dish {
+      dishType: DishType;
+
+      constructor(_dishType: DishType) {
+          console.log("dish constructor");
+          this.dishType = _dishType;
+          
+      }
+
+      public draw(): void{
+          console.log("sketch Dish");
+          switch (this.dishType) {
+
+              case DishType.Döner:
+                  crc2.beginPath();
+                  crc2.fillStyle = "#BF882E";
+                  crc2.fillRect(150, 83, 65, 32);     //Döner
+                  crc2.save();
+                  crc2.restore();
+                  break;
+              
+              case DishType.Falafel:
+                  crc2.beginPath();
+                  crc2.fillStyle = "#BF882E";
+                  crc2.fillRect(150, 8, 65, 32);      //Falafel
+                  crc2.save();
+                  crc2.restore();
+                  break;
+              
+              case DishType.Yufka:
+                  crc2.beginPath();
+                  crc2.fillStyle = "#BF882E";
+                  crc2.fillRect(150, 45.5, 65, 32);   //Yufka
+                  crc2.save();
+                  crc2.restore();
+                  break;
+          }
+      }
   }
 }

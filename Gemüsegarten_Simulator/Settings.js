@@ -4,6 +4,7 @@ var Gemüsegarten_Simulator;
     //export let allFields: Field[] = [];
     //export let allPlants: Plant[] = [];
     Gemüsegarten_Simulator.time = 0;
+    let bugs = [];
     function handleLoad(_event) {
         console.log("Start");
         let form = (document.querySelector("div#form"));
@@ -13,33 +14,40 @@ var Gemüsegarten_Simulator;
             return;
         Gemüsegarten_Simulator.crc2 = canvas.getContext("2d");
         drawBackground();
-        drawField({ x: 0, y: 0 });
+        drawField({ x: 0, y: -20 });
         drawSalad({ x: 750, y: 500 }, { x: 40, y: 40 });
         //createPaths();
-        drawTomato();
-        let bugs = new Gemüsegarten_Simulator.Bug(1);
+        //drawTomato();
         let vegetables = new Gemüsegarten_Simulator.Vegetable((this.x, this.y), this.vegs, 1);
         console.log(bugs);
         console.log(vegetables);
         //vegetables.push();
         form.addEventListener("change", buildGame);
+        canvas.addEventListener("mousedown", grabVeg);
+        canvas.addEventListener("mousedown", placeVeg);
+        canvas.addEventListener("mousedown", addToVeg);
+        window.setInterval(update, 20);
+    }
+    function createBugs(_nBugs) {
+        for (let i = 0; i < _nBugs; i++) {
+            let bugs = new Gemüsegarten_Simulator.Bug(1.0);
+            bugs.push(bug);
+        }
     }
     //TOMATO
     function drawTomato() {
         Gemüsegarten_Simulator.crc2.beginPath();
-        Gemüsegarten_Simulator.crc2.strokeStyle = "black";
         Gemüsegarten_Simulator.crc2.fillStyle = "red";
-        Gemüsegarten_Simulator.crc2.rect(100, 100, 500, 400);
+        Gemüsegarten_Simulator.crc2.ellipse(750, 100, 20, 30, Math.PI / 2, 0, 2 * Math.PI);
         Gemüsegarten_Simulator.crc2.closePath();
-        Gemüsegarten_Simulator.crc2.stroke();
         Gemüsegarten_Simulator.crc2.fill();
     }
     function drawField(_position) {
         let nRows = 5;
         let nCollumn = 8;
-        let fieldSize = 50;
-        let widthField = 490;
-        let heightField = 270;
+        let fieldSize = 60;
+        let widthField = 510;
+        let heightField = 350;
         let field = new Path2D();
         field.rect(0, 0, fieldSize, fieldSize);
         Gemüsegarten_Simulator.crc2.save();
@@ -52,7 +60,7 @@ var Gemüsegarten_Simulator;
                 Gemüsegarten_Simulator.crc2.save();
                 let x = 0;
                 if (drawn == 0) {
-                    x = 30 + offsetX;
+                    x = 20 + offsetX;
                 }
                 else {
                     x = 20 + widthField / 8 + offsetX;
@@ -63,7 +71,7 @@ var Gemüsegarten_Simulator;
                 Gemüsegarten_Simulator.crc2.fill(field);
                 Gemüsegarten_Simulator.crc2.restore();
             }
-            offsetY += fieldSize + 30;
+            offsetY += fieldSize + 50;
         }
         Gemüsegarten_Simulator.crc2.restore();
     }
@@ -78,7 +86,7 @@ var Gemüsegarten_Simulator;
         for (let drawn = 0; drawn < nParticles; drawn++) {
             Gemüsegarten_Simulator.crc2.save();
             let x = (Math.random() - 0.5) * _size.x;
-            let y = (Math.random() * _size.y);
+            let y = Math.random() * _size.y;
             Gemüsegarten_Simulator.crc2.translate(x, y);
             Gemüsegarten_Simulator.crc2.fill(particle);
             Gemüsegarten_Simulator.crc2.restore();
@@ -104,41 +112,44 @@ var Gemüsegarten_Simulator;
             let money = Number(selection.getAttribute("money"));
             console.log(money);
         }
-        /*function createPaths(): void {
-          bugPath = createBugPaths(drawField);
+    }
+    function update() {
+        Gemüsegarten_Simulator.crc2.fillRect(0, 0, Gemüsegarten_Simulator.crc2.canvas.width, Gemüsegarten_Simulator.crc2.canvas.height);
+        for (let bug of bugs) {
+            bug.move(1 / 50);
+            bug.draw();
         }
-    
-        /*vegDied();
-    
-        handleAttacks();
-    
-        function vegDied(): void {
-          for (let i: number = vegetables.length - 1; i >= 0; i--) {
-            if (vegetables[i].expandable)
-              vegetables.splice(i, 1);
-          }
-        }
-    
-        function handleAttacks(): void {
-          for (let i: number = 0; i < bugs.length; i++)
-            for (let j: number = i+1; j < bugs.length; j++)
-            let veg: Vegetable = vegetables[i];
-            let bug: Bug = bugs[j];
-            if(veg.bugAttack(bug)) {
-              bug.attacked();
-            }
-        }
-    
-        /*function displayCapital(_event: Event): void {
-          let progress: HTMLProgressElement = <HTMLProgressElement>document.querySelector("progress");
-          let radio: string = (<HTMLInputElement>_event.target).value;
-          progress.value = parseFloat(radio);
-              let capital: HTMLDivElement = <HTMLDivElement>document.querySelector("div#capital");
-        capital.innerHTML = "";
-        }*/
     }
 })(Gemüsegarten_Simulator || (Gemüsegarten_Simulator = {}));
-function drawField(field) {
-    throw new Error("Function not implemented.");
-}
+/*function createPaths(): void {
+      bugPath = createBugPaths(drawField);
+    }*/
+/*vegDied();
+
+    handleAttacks();
+
+    function vegDied(): void {
+      for (let i: number = vegetables.length - 1; i >= 0; i--) {
+        if (vegetables[i].expandable)
+          vegetables.splice(i, 1);
+      }
+    }
+
+    function handleAttacks(): void {
+      for (let i: number = 0; i < bugs.length; i++)
+        for (let j: number = i+1; j < bugs.length; j++)
+        let veg: Vegetable = vegetables[i];
+        let bug: Bug = bugs[j];
+        if(veg.bugAttack(bug)) {
+          bug.attacked();
+        }
+    }
+
+    /*function displayCapital(_event: Event): void {
+      let progress: HTMLProgressElement = <HTMLProgressElement>document.querySelector("progress");
+      let radio: string = (<HTMLInputElement>_event.target).value;
+      progress.value = parseFloat(radio);
+          let capital: HTMLDivElement = <HTMLDivElement>document.querySelector("div#capital");
+    capital.innerHTML = "";
+    }*/
 //# sourceMappingURL=Settings.js.map
