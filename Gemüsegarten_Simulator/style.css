@@ -1,0 +1,66 @@
+body {
+  display: block;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  width: 100%;
+  text-align: center;
+}
+
+/*header {
+  text-align: center;
+}*/
+
+div {
+  border: thin solid grey;
+  /*text-align: 30%;*/
+  width: 50%;
+  margin: auto;
+  padding: 5px;
+}
+
+/*h1 {
+  text-align: center;
+}*/
+
+h2 {
+  /*text-align: center;*/
+  color: #66a33f;
+}
+
+input[type="radio"] {
+  margin: 0 10px 0 10px;
+}
+
+button {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 20px;
+  width: 99%;
+  /*text-align: center;*/
+  text-decoration: none;
+  display: block;
+  font-size: 20px;
+  margin: auto;
+  margin-top: 8px;
+
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+#start {
+  background-color: black;
+  color: white;
+}
+
+#start:hover {
+  font-size: 28px;
+  background-color: #66a33f;
+  color: white;
+}
+
+/*progress {
+  height: 4em;
+  width: 4em;
+  transform: rotate(-90deg);
+}*/

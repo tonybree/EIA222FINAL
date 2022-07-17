@@ -7,6 +7,7 @@
     <title>Gemüsegarten Simulator</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
     <script src="Settings.js"></script>
+    <script src="StartGame.js"></script>
   </head>
 
   <body>
@@ -17,24 +18,68 @@
     <form>
       <div id="form">
         <fieldset>
-          <legend>Anfangskapital</legend>
-          <input type="radio" name="Capital" id="thousendFivehundred" value="Easy" gain="1500"/>
-          <label for="Easy">1500€</label>
-          <input type="radio" name="Capital" id="thousend" value="Mid" gain="1000" checked />
-          <label for="Mid">1000€</label>
-          <input type="radio" name="Capital" id="fivehundred" value="Hard" gain="500" />
-          <label for="Hard">500€</label>
+          <legend>Anfangskapital:</legend>
+          <input
+            type="radio"
+            name="Capital"
+            id="easy"
+            value="1500"
+            money="1500.00"
+          />
+          <label for="easy">1500€ </label>
+          <input
+            type="radio"
+            name="Capital"
+            id="mid"
+            value="1000"
+            money="1000.00"
+            checked
+          />
+          <label for="mid">1000€ </label>
+          <input
+            type="radio"
+            name="Capital"
+            id="hard"
+            value="500"
+            money="500.00"
+          />
+          <label for="hard">500€ </label>
         </fieldset>
         <fieldset>
-          <legend>Preise</legend>
-          <input type="radio" name="Pricerange" id="easy" value="Easy" price="1.50" />
-          <label for="Easy">Preiskategorie 1</label>
-          <input type="radio" name="Pricerange" id="mid" value="Mid" price="1.00" checked />
-          <label for="Mid">Preiskategorie 2</label>
-          <input type="radio" name="Pricerange" id="hard" value="Hard" price="0.50" />
-          <label for="Hard">Preiskategorie 3</label>
+          <legend>Preise:</legend>
+          <input
+            type="radio"
+            name="Pricerange"
+            id="easy"
+            value="High"
+            money="1.50"
+          />
+          <label for="easy">Preiskategorie 1 </label>
+          <input
+            type="radio"
+            name="Pricerange"
+            id="mid"
+            value="Mid"
+            money="1.00"
+            checked
+          />
+          <label for="mid">Preiskategorie 2 </label>
+          <input
+            type="radio"
+            name="Pricerange"
+            id="hard"
+            value="Low"
+            money="0.50"
+          />
+          <label for="hard">Preiskategorie 3 </label>
         </fieldset>
       </div>
     </form>
+    <button onclick="document.location='Game.html'" id="start">LOS!</button>
+    <h2>Lies mich!</h2>
+    <p>
+      Achtung! Die Preis-Kategorien bestimmen einen bestimmten Bereich, in dem
+      die Preise variieren können.
+    </p>
   </body>
 </html>

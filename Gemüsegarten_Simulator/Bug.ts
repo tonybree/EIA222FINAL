@@ -1,25 +1,27 @@
 namespace Gemüsegarten_Simulator {
-    export class Bug extends Vector {
-        public position: Vector;
-        protected velocity: Vector;
-        private lifetime: number;
-        private speed: number;
-
-        constructor (_position?: Vector, _velocity: Vector) {
-            this.position? = Vector;
-            this.velocity = Vector;
+    export class Bug {
+        position: Vector;
+        velocity: Vector;
+        hunger: number;
+        public bugAttack: number = 0;
+        
+        constructor (_hunger: number) {
+            console.log("constructor for a Bug");
+            this.position = new Vector(0, 0);
+            this.velocity = new Vector(0, 0);
+            this.velocity.getRandom(100, 50);
+            this.hunger =_hunger;
         }
 
-        
+        move(_timeslice: number): void {
+            console.log("move it");
+        }
 
-        public move(_timeslice: number): void {
-            //console.log("Bug moves");
-            let offset: Vector = this.velocity.copy();
-            offset.scale(_timeslice);
-            this.position.add(offset);
-
-            if (this.position.x < 0)
-                this.position.x += C
+        draw(): void {
+            console.log("draw Bug");
+            crc2.save();
+            crc2.translate(this.position.x, this.position.y);
+            crc2.stroke()
         }
     }
 }
