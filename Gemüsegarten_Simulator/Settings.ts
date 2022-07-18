@@ -1,4 +1,9 @@
 namespace Gemüsegarten_Simulator {
+  export enum VEGETABLE_EVENT {
+    CHOOSE_VEG = "chosenVEG",
+    CHOOSE_FIELD = "chosenField",
+  }
+
   window.addEventListener("load", handleLoad);
 
   export let canvas: HTMLCanvasElement;
@@ -6,72 +11,85 @@ namespace Gemüsegarten_Simulator {
   //export let allFields: Field[] = [];
   //export let allPlants: Plant[] = [];
   export let time: number = 0;
-  let bugs: Bug[] = [];
+  let vegetables: Vegetable[] = [];
+  //let bugs: Bug[] = [];
 
   function handleLoad(_event: Event): void {
     console.log("Start");
+
+    //FORM
     let form: HTMLDivElement = <HTMLDivElement>(
       document.querySelector("div#form")
     );
+    let formData: FormData = new FormData(document.forms[0]);
+    for (let entry of formData) {
+      let selection: HTMLInputElement = <HTMLInputElement>(
+        document.querySelector("[value='" + entry[1] + "']")
+      );
+      //console.log(selection);
+      let money: number = Number(selection.getAttribute("money"));
+      console.log(money);
+    }
     //let radio: HTMLInputElement = <HTMLInputElement>document.querySelector("input#radio")
+
+    //CANVAS
     let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
     if (!canvas) return;
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
+    //createPaths();
+    //drawBugs(3);
+
+    //form.addEventListener("change", displayCapital);
+
+    console.log("vegetables");
+    //canvas.addEventListener(VEGETABLE_EVENT.CHOOSE_VEG, handleVegGrab);
+    //canvas.addEventListener(VEGETABLE_EVENT.CHOOSE_FIELD, handlePutVeg);
+
     drawBackground();
     drawField({ x: 0, y: -20 });
 
-    //createPaths();
-    //drawBugs();
+    createVegetables();
+
     drawTomato();
     drawCucumber();
     drawPaprika();
     drawEggplant();
     drawSalad({ x: 750, y: 505 }, { x: 30, y: 30 });
-    createBugs(3);
+    //createBugs(3);
 
-    let vegetables: Vegetable = new Vegetable((this.x, this.y), this.vegs, 1);
-    console.log(bugs);
-    console.log(vegetables);
-    //vegetables.push();
+    //console.log(bugs);
 
-    form.addEventListener("change", buildGame);
-
-    canvas.addEventListener("mousedown", grabVeg);
-    canvas.addEventListener("mousedown", placeVeg);
-    canvas.addEventListener("mousedown", addToVeg);
-
+    beginTimer()
     window.setInterval(update, 20);
   }
 
-  function createBugs(_nBugs: number): void {
-    for (let i: number = 0; i < _nBugs; i++) {
-      let bugs: Bug = new Bug(1.0);
-      bugs.push(bug);
-    }
+  //console.log(formData);
+
+  /*function handleVegGrab(_event: Event): void {
+    let vegetable: Vegetable = (<CustomEvent>_event).detail.vegetable;
+  }*/
+
+  function createVegetables(): void {
+    console.log("Create Vegs");
+    let vegetable: Vegetable = new Vegetable(this.vegType, 1);
+    vegetables.push(vegetable);
   }
 
-
+  /*function createBugs(_nBugs: number): void {
+    for (let i: number = 0; i < _nBugs; i++) {
+      let bug: Bug = new Bug(1.0);
+      bugs.push(bug);
+    }
+  }*/
 
   //TOMATO
   function drawTomato(): void {
     crc2.save();
-    crc2.beginPath();
-    crc2.shadowOffsetX = 3;
-    crc2.shadowOffsetY = 3;
-    crc2.shadowColor = "black";
-    crc2.shadowBlur = 5;
-    crc2.fillStyle = "red";
-    crc2.ellipse(750, 80, 20, 30, Math.PI / 2, 0, 2 * Math.PI);
-    crc2.closePath();
-    crc2.fill();
-    crc2.restore();
-
-    crc2.save();
-    crc2.font = '20px Arial';
+    crc2.font = "20px Arial";
     crc2.lineWidth = 1;
     crc2.strokeStyle = "darkred";
-    crc2.strokeText('Tomato', 720, 130, 60);
+    crc2.strokeText("Tomato", 720, 130, 60);
     crc2.restore();
   }
 
@@ -90,10 +108,10 @@ namespace Gemüsegarten_Simulator {
     crc2.restore();
 
     crc2.save();
-    crc2.font = '20px Arial';
+    crc2.font = "20px Arial";
     crc2.lineWidth = 1;
-    crc2.strokeStyle = "hsl(150, 100%, 10%)";
-    crc2.strokeText('Cucumber', 710, 240, 80);
+    crc2.strokeStyle = "hsl(150, 100%, 30%)";
+    crc2.strokeText("Cucumber", 710, 240, 80);
     crc2.restore();
   }
 
@@ -116,10 +134,10 @@ namespace Gemüsegarten_Simulator {
     crc2.restore();
 
     crc2.save();
-    crc2.font = '20px Arial';
+    crc2.font = "20px Arial";
     crc2.lineWidth = 1;
     crc2.strokeStyle = "hsl(54, 100%, 15%)";
-    crc2.strokeText('Paprika', 720, 350, 60);
+    crc2.strokeText("Paprika", 720, 350, 60);
     crc2.restore();
   }
 
@@ -141,10 +159,10 @@ namespace Gemüsegarten_Simulator {
     crc2.restore();
 
     crc2.save();
-    crc2.font = '20px Arial';
+    crc2.font = "20px Arial";
     crc2.lineWidth = 1;
     crc2.strokeStyle = "hsl(276, 100%, 20%)";
-    crc2.strokeText('Eggplant', 715, 460, 70);
+    crc2.strokeText("Eggplant", 715, 460, 70);
     crc2.restore();
   }
 
@@ -174,10 +192,10 @@ namespace Gemüsegarten_Simulator {
     }
     crc2.restore();
     crc2.save();
-    crc2.font = '20px Arial';
+    crc2.font = "20px Arial";
     crc2.lineWidth = 1;
     crc2.strokeStyle = "green";
-    crc2.strokeText('Salad', 728, 570, 80);
+    crc2.strokeText("Salad", 728, 570, 80);
   }
 
   // DRAW FIELD
@@ -227,28 +245,27 @@ namespace Gemüsegarten_Simulator {
     crc2.rect(20, 30, 50, 50);
     crc2.stroke();*/
   }
-
-  function buildGame(_event: Event): void {
-    //console.log(_event);
-
-    let formData: FormData = new FormData(document.forms[0]);
-    //console.log(formData);
-
-    for (let entry of formData) {
-      let selection: HTMLInputElement = <HTMLInputElement>(
-        document.querySelector("[value='" + entry[1] + "']")
-      );
-      //console.log(selection);
-      let money: number = Number(selection.getAttribute("money"));
-      console.log(money);
-    }
-  }
   function update(): void {
     crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
 
-    for (let bug of bugs) {
+    /*for (let bug of bugs) {
       bug.move(1 / 50);
       bug.draw();
+    }*/
+  }
+
+  /*function beginTimer(): void {
+    setInterval(timer, 2000);
+  }
+
+  /*function timer(): void {
+    time ++;
+    console.log(time);
+    for (let vegetable of vegetables) {
+      vegetable.draw();
+      //vegetable.state();
+      //vegetable.health();
+      //vegetable.value = Math.abs(Math.sin(time) + vegetables.price);
     }
   }
 }
