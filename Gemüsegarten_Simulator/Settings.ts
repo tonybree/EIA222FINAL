@@ -50,7 +50,7 @@ namespace Gemüsegarten_Simulator {
     drawField({ x: 0, y: -20 });
 
     createVegetables();
-
+    VEGS.draw();
     drawTomato();
     drawCucumber();
     drawPaprika();
@@ -60,9 +60,11 @@ namespace Gemüsegarten_Simulator {
 
     //console.log(bugs);
 
-    beginTimer()
+    //beginTimer();
     window.setInterval(update, 20);
   }
+
+
 
   //console.log(formData);
 
@@ -73,6 +75,7 @@ namespace Gemüsegarten_Simulator {
   function createVegetables(): void {
     console.log("Create Vegs");
     let vegetable: Vegetable = new Vegetable(this.vegType, 1);
+
     vegetables.push(vegetable);
   }
 

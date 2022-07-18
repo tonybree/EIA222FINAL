@@ -37,6 +37,7 @@ var Gemüsegarten_Simulator;
         drawBackground();
         drawField({ x: 0, y: -20 });
         createVegetables();
+        Gemüsegarten_Simulator.VEGS.draw();
         drawTomato();
         drawCucumber();
         drawPaprika();
@@ -44,7 +45,7 @@ var Gemüsegarten_Simulator;
         drawSalad({ x: 750, y: 505 }, { x: 30, y: 30 });
         //createBugs(3);
         //console.log(bugs);
-        beginTimer();
+        //beginTimer();
         window.setInterval(update, 20);
     }
     //console.log(formData);
