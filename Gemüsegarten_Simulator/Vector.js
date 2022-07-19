@@ -9,14 +9,6 @@ var Gemüsegarten_Simulator;
         static getDif(_vFirst, _vSec) {
             return new Vector(_vFirst.x - _vSec.x, _vFirst.y - _vSec.y);
         }
-        static getRandom(_minLength, _maxLength) {
-            let vector = new Vector(0, 0);
-            let length = _minLength + Math.random() * (_maxLength - _minLength);
-            let direction = Math.random() * 2 * Math.PI;
-            vector.set(Math.cos(direction), Math.sin(direction));
-            vector.scale(length);
-            return vector;
-        }
         get length() {
             return Math.hypot(this.x, this.y);
         }

@@ -17,7 +17,7 @@ namespace Gemüsegarten_Simulator {
     constructor(_vegType: number, _state: Number) {
       this.vegType = _vegType;
       this.state = _state;
-      this.health = 3;
+      this.health = 1;
     }
 
     public isAttacked(_bug: Bug): boolean {
@@ -27,12 +27,7 @@ namespace Gemüsegarten_Simulator {
       return true;
     }
 
-    public attacked(): void {
-      console.log("Attacked", this);
-      this.expandable = true;
-    }
-
-    public draw(): void {
+    public drawVegs(): void {
       switch (this.vegType) {
         case VEGS.TOMATO:
           crc2.save();

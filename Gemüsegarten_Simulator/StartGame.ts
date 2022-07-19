@@ -1,4 +1,4 @@
-namespace Gemüsegarten_Simulator {
+/*namespace Gemüsegarten_Simulator {
  class StartGame {
     
     private canvas: HTMLCanvasElement;
@@ -37,6 +37,6 @@ namespace Gemüsegarten_Simulator {
 
     drawField(field: Field[]): void {
       field.forEach((field) => this.drawField(field));
-    }*/
+    }
   }
-}
+}*/

@@ -10,7 +10,6 @@ namespace Gemüsegarten_Simulator {
             console.log("constructor for a Bug");
             this.position = new Vector(0, 0);
             this.velocity = new Vector(0, 0);
-            this.velocity = Vector.getRandom(100, 200);
             this.hunger =_hunger;
         }
 
@@ -33,7 +32,7 @@ namespace Gemüsegarten_Simulator {
                 this.position.y -= crc2.canvas.height;
         }
 
-        drawBugs(): void {
+        public drawBugs(): void {
             crc2.save();
             crc2.beginPath();
             crc2.fillStyle = "white";

@@ -10,7 +10,6 @@ var Gemüsegarten_Simulator;
             console.log("constructor for a Bug");
             this.position = new Gemüsegarten_Simulator.Vector(0, 0);
             this.velocity = new Gemüsegarten_Simulator.Vector(0, 0);
-            this.velocity = Gemüsegarten_Simulator.Vector.getRandom(100, 200);
             this.hunger = _hunger;
         }
         attacked() {

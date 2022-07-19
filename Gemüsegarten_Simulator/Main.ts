@@ -12,7 +12,7 @@ namespace Gemüsegarten_Simulator {
   //export let allPlants: Plant[] = [];
   export let time: number = 0;
   let vegetables: Vegetable[] = [];
-  //let bugs: Bug[] = [];
+  let bugs: Bug[] = [];
 
   function handleLoad(_event: Event): void {
     console.log("Start");
@@ -38,7 +38,6 @@ namespace Gemüsegarten_Simulator {
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
     //createPaths();
-    //drawBugs(3);
 
     //form.addEventListener("change", displayCapital);
 
@@ -49,14 +48,17 @@ namespace Gemüsegarten_Simulator {
     drawBackground();
     drawField({ x: 0, y: -20 });
 
-    createVegetables();
-    VEGS.draw();
+
+
+
     drawTomato();
     drawCucumber();
     drawPaprika();
     drawEggplant();
     drawSalad({ x: 750, y: 505 }, { x: 30, y: 30 });
-    //createBugs(3);
+    drawBugs();
+    createVegetables();
+    createBugs(3);
 
     //console.log(bugs);
 
@@ -72,22 +74,53 @@ namespace Gemüsegarten_Simulator {
     let vegetable: Vegetable = (<CustomEvent>_event).detail.vegetable;
   }*/
 
+
   function createVegetables(): void {
     console.log("Create Vegs");
     let vegetable: Vegetable = new Vegetable(this.vegType, 1);
-
     vegetables.push(vegetable);
   }
 
-  /*function createBugs(_nBugs: number): void {
+  function createBugs(_nBugs: number): void {
     for (let i: number = 0; i < _nBugs; i++) {
       let bug: Bug = new Bug(1.0);
       bugs.push(bug);
     }
-  }*/
+  }
+
+  function drawBugs(): void {
+    crc2.save();
+    crc2.beginPath();
+    crc2.fillStyle = "white";
+    crc2.ellipse(120, 90, 10, 15, Math.PI / 1.5, 0, 2 * Math.PI);
+    crc2.ellipse(130, 70, 10, 15, Math.PI / 1.5, 0, 2 * Math.PI);
+    crc2.closePath();
+    crc2.fill();
+    crc2.restore();
+
+    crc2.save();
+    crc2.beginPath();
+    crc2.fillStyle = "black";
+    crc2.ellipse(125, 81, 10, 10, Math.PI / 2, 0, 2 * Math.PI);
+    crc2.closePath();
+    crc2.fill();
+    crc2.restore();
+  }
 
   //TOMATO
   function drawTomato(): void {
+    crc2.save();
+    crc2.beginPath();
+    crc2.shadowOffsetX = 3;
+    crc2.shadowOffsetY = 3;
+    crc2.shadowColor = "black";
+    crc2.shadowBlur = 5;
+    crc2.fillStyle = "red";
+    crc2.ellipse(750, 80, 20, 30, Math.PI / 2, 0, 2 * Math.PI);
+    crc2.closePath();
+    crc2.fill();
+    crc2.restore();
+
     crc2.save();
     crc2.font = "20px Arial";
     crc2.lineWidth = 1;
@@ -251,10 +284,10 @@ namespace Gemüsegarten_Simulator {
   function update(): void {
     crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
 
-    /*for (let bug of bugs) {
+    for (let bug of bugs) {
       bug.move(1 / 50);
-      bug.draw();
-    }*/
+      bug.drawBugs();
+    }
   }
 
   /*function beginTimer(): void {
@@ -271,7 +304,7 @@ namespace Gemüsegarten_Simulator {
       //vegetable.value = Math.abs(Math.sin(time) + vegetables.price);
     }
   }
-}
+}*/
 
 /*function createPaths(): void {
       bugPath = createBugPaths(drawField);

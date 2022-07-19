@@ -18,7 +18,7 @@ var Gemüsegarten_Simulator;
         constructor(_vegType, _state) {
             this.vegType = _vegType;
             this.state = _state;
-            this.health = 3;
+            this.health = 1;
         }
         isAttacked(_bug) {
             let difference = Gemüsegarten_Simulator.Vector.getDif(this.position, _bug.position);
@@ -26,11 +26,7 @@ var Gemüsegarten_Simulator;
                 return false;
             return true;
         }
-        attacked() {
-            console.log("Attacked", this);
-            this.expandable = true;
-        }
-        draw() {
+        drawVegs() {
             switch (this.vegType) {
                 case VEGS.TOMATO:
                     Gemüsegarten_Simulator.crc2.save();

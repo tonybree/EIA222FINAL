@@ -10,7 +10,7 @@ var Gemüsegarten_Simulator;
     //export let allPlants: Plant[] = [];
     Gemüsegarten_Simulator.time = 0;
     let vegetables = [];
-    //let bugs: Bug[] = [];
+    let bugs = [];
     function handleLoad(_event) {
         console.log("Start");
         //FORM
@@ -29,21 +29,20 @@ var Gemüsegarten_Simulator;
             return;
         Gemüsegarten_Simulator.crc2 = canvas.getContext("2d");
         //createPaths();
-        //drawBugs(3);
         //form.addEventListener("change", displayCapital);
         console.log("vegetables");
         //canvas.addEventListener(VEGETABLE_EVENT.CHOOSE_VEG, handleVegGrab);
         //canvas.addEventListener(VEGETABLE_EVENT.CHOOSE_FIELD, handlePutVeg);
         drawBackground();
         drawField({ x: 0, y: -20 });
-        createVegetables();
-        Gemüsegarten_Simulator.VEGS.draw();
         drawTomato();
         drawCucumber();
         drawPaprika();
         drawEggplant();
         drawSalad({ x: 750, y: 505 }, { x: 30, y: 30 });
-        //createBugs(3);
+        drawBugs();
+        createVegetables();
+        createBugs(3);
         //console.log(bugs);
         //beginTimer();
         window.setInterval(update, 20);
@@ -57,14 +56,42 @@ var Gemüsegarten_Simulator;
         let vegetable = new Gemüsegarten_Simulator.Vegetable(this.vegType, 1);
         vegetables.push(vegetable);
     }
-    /*function createBugs(_nBugs: number): void {
-      for (let i: number = 0; i < _nBugs; i++) {
-        let bug: Bug = new Bug(1.0);
-        bugs.push(bug);
-      }
-    }*/
+    function createBugs(_nBugs) {
+        for (let i = 0; i < _nBugs; i++) {
+            let bug = new Gemüsegarten_Simulator.Bug(1.0);
+            bugs.push(bug);
+        }
+    }
+    function drawBugs() {
+        Gemüsegarten_Simulator.crc2.save();
+        Gemüsegarten_Simulator.crc2.beginPath();
+        Gemüsegarten_Simulator.crc2.fillStyle = "white";
+        Gemüsegarten_Simulator.crc2.ellipse(120, 90, 10, 15, Math.PI / 1.5, 0, 2 * Math.PI);
+        Gemüsegarten_Simulator.crc2.ellipse(130, 70, 10, 15, Math.PI / 1.5, 0, 2 * Math.PI);
+        Gemüsegarten_Simulator.crc2.closePath();
+        Gemüsegarten_Simulator.crc2.fill();
+        Gemüsegarten_Simulator.crc2.restore();
+        Gemüsegarten_Simulator.crc2.save();
+        Gemüsegarten_Simulator.crc2.beginPath();
+        Gemüsegarten_Simulator.crc2.fillStyle = "black";
+        Gemüsegarten_Simulator.crc2.ellipse(125, 81, 10, 10, Math.PI / 2, 0, 2 * Math.PI);
+        Gemüsegarten_Simulator.crc2.closePath();
+        Gemüsegarten_Simulator.crc2.fill();
+        Gemüsegarten_Simulator.crc2.restore();
+    }
     //TOMATO
     function drawTomato() {
+        Gemüsegarten_Simulator.crc2.save();
+        Gemüsegarten_Simulator.crc2.beginPath();
+        Gemüsegarten_Simulator.crc2.shadowOffsetX = 3;
+        Gemüsegarten_Simulator.crc2.shadowOffsetY = 3;
+        Gemüsegarten_Simulator.crc2.shadowColor = "black";
+        Gemüsegarten_Simulator.crc2.shadowBlur = 5;
+        Gemüsegarten_Simulator.crc2.fillStyle = "red";
+        Gemüsegarten_Simulator.crc2.ellipse(750, 80, 20, 30, Math.PI / 2, 0, 2 * Math.PI);
+        Gemüsegarten_Simulator.crc2.closePath();
+        Gemüsegarten_Simulator.crc2.fill();
+        Gemüsegarten_Simulator.crc2.restore();
         Gemüsegarten_Simulator.crc2.save();
         Gemüsegarten_Simulator.crc2.font = "20px Arial";
         Gemüsegarten_Simulator.crc2.lineWidth = 1;
@@ -212,10 +239,10 @@ var Gemüsegarten_Simulator;
     }
     function update() {
         Gemüsegarten_Simulator.crc2.fillRect(0, 0, Gemüsegarten_Simulator.crc2.canvas.width, Gemüsegarten_Simulator.crc2.canvas.height);
-        /*for (let bug of bugs) {
-          bug.move(1 / 50);
-          bug.draw();
-        }*/
+        for (let bug of bugs) {
+            bug.move(1 / 50);
+            bug.drawBugs();
+        }
     }
     /*function beginTimer(): void {
       setInterval(timer, 2000);
@@ -231,11 +258,10 @@ var Gemüsegarten_Simulator;
         //vegetable.value = Math.abs(Math.sin(time) + vegetables.price);
       }
     }
-  }
-  
-  /*function createPaths(): void {
-        bugPath = createBugPaths(drawField);
-      }*/
+  }*/
+    /*function createPaths(): void {
+          bugPath = createBugPaths(drawField);
+        }*/
     /*vegDied();
     
         handleAttacks();
@@ -279,11 +305,10 @@ var Gemüsegarten_Simulator;
     //vegetable.value = Math.abs(Math.sin(time) + vegetables.price);
   }
 }
-}
-
+}*/
 /*function createPaths(): void {
-    bugPath = createBugPaths(drawField);
-  }*/
+      bugPath = createBugPaths(drawField);
+    }*/
 /*vegDied();
 
     handleAttacks();
@@ -312,4 +337,4 @@ var Gemüsegarten_Simulator;
           let capital: HTMLDivElement = <HTMLDivElement>document.querySelector("div#capital");
     capital.innerHTML = "";
     }*/
-//# sourceMappingURL=Settings.js.map
+//# sourceMappingURL=Main.js.map
